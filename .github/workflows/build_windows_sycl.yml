@@ -47,12 +47,12 @@ jobs:
       uses: actions/cache@v4
       with:
         path: C:\Program Files (x86)\Intel\oneAPI
-        key: ${{ runner.os }}-dpcpp-2024.1
+        key: ${{ runner.os }}-dpcpp-2024.2
 
     - name: Setup SYCL
       if: steps.cache-sycl.outputs.cache-hit != 'true'
       run: |
-        curl -J -o dpcpp_installer.exe https://registrationcenter-download.intel.com/akdlm/IRC_NAS/3165d8c7-088f-410f-9723-6d8ee88d9e5b/w_dpcpp-cpp-compiler_p_2024.1.2.505_offline.exe
+        curl -J -o dpcpp_installer.exe https://registrationcenter-download.intel.com/akdlm/IRC_NAS/15a35578-2f9a-4f39-804b-3906e0a5f8fc/w_dpcpp-cpp-compiler_p_2024.2.1.83_offline.exe
         dpcpp_installer -s -a -s --eula accept
 
     - name: Setup ocloc (Gen12+)
