@@ -9,7 +9,7 @@ on:
       - 'rtc_source/*'
       - 'hip_source/*'
       - 'sycl_source/*'
-      - '.github/workflows/windows.yml'
+      - '.github/workflows/build_windows_sycl.yml'
   workflow_dispatch:
     inputs:
       tag:
@@ -108,22 +108,6 @@ jobs:
       run: |
         cd artifact
 
-        mkdir VapourSynth-BM3DCUDA-${{ github.event.inputs.tag }}
-        xcopy bm3dcuda.dll VapourSynth-BM3DCUDA-${{ github.event.inputs.tag }} /f
-        7z a -t7z -mx=9 ../VapourSynth-BM3DCUDA-${{ github.event.inputs.tag }}.7z VapourSynth-BM3DCUDA-${{ github.event.inputs.tag }}
-
-        mkdir VapourSynth-BM3DCUDA_RTC-${{ github.event.inputs.tag }}
-        xcopy bm3dcuda_rtc.dll VapourSynth-BM3DCUDA_RTC-${{ github.event.inputs.tag }} /f
-        7z a -t7z -mx=9 ../VapourSynth-BM3DCUDA_RTC-${{ github.event.inputs.tag }}.7z VapourSynth-BM3DCUDA_RTC-${{ github.event.inputs.tag }}
-
-        mkdir VapourSynth-BM3DCPU-${{ github.event.inputs.tag }}
-        xcopy bm3dcpu-*.dll VapourSynth-BM3DCPU-${{ github.event.inputs.tag }} /f
-        7z a -t7z -mx=9 ../VapourSynth-BM3DCPU-${{ github.event.inputs.tag }}.7z VapourSynth-BM3DCPU-${{ github.event.inputs.tag }}
-
-        mkdir VapourSynth-BM3DHIP-${{ github.event.inputs.tag }}
-        xcopy bm3dhip.dll VapourSynth-BM3DHIP-${{ github.event.inputs.tag }} /f
-        7z a -t7z -mx=9 ../VapourSynth-BM3DHIP-${{ github.event.inputs.tag }}.7z VapourSynth-BM3DHIP-${{ github.event.inputs.tag }}
-        
         :: mkdir VapourSynth-BM3DSYCL-${{ github.event.inputs.tag }}
         :: xcopy bm3dsycl_*.dll VapourSynth-BM3DSYCL-${{ github.event.inputs.tag }} /f
         :: 7z a -t7z -mx=9 ../VapourSynth-BM3DSYCL-${{ github.event.inputs.tag }}.7z VapourSynth-BM3DSYCL-${{ github.event.inputs.tag }}
