@@ -58,14 +58,14 @@ jobs:
     - name: Setup ocloc (Gen12+)
       shell: pwsh
       run: |
-        $env:PATH = "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\lib\ocloc;$env:PATH"
+        $env:PATH = "C:\Program Files (x86)\Intel\oneAPI\compiler\2024.2\lib\ocloc;$env:PATH"
         "PATH=$env:PATH" | Out-File -Append -FilePath $env:GITHUB_ENV
 
     - name: Configure (SYCL, Gen12+)
       run: |
         ocloc compile --help
 
-        call "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\env\vars.bat"
+        call "C:\Program Files (x86)\Intel\oneAPI\compiler\2024.2\env\vars.bat"
       
         cmake -S . -B build_sycl_gen12+ -G Ninja -LA ^
           -D CMAKE_BUILD_TYPE=Release ^
@@ -80,7 +80,7 @@ jobs:
 
     - name: Build (SYCL, Gen12+)
       run: |
-        call "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\env\vars.bat"
+        call "C:\Program Files (x86)\Intel\oneAPI\compiler\2024.2\env\vars.bat"
 
         cmake --build build_sycl_gen12+ --verbose
 
@@ -108,9 +108,9 @@ jobs:
         :: 7z a -t7z -mx=9 ../VapourSynth-BM3DSYCL-${{ github.event.inputs.tag }}.7z VapourSynth-BM3DSYCL-${{ github.event.inputs.tag }}
         
         :: mkdir SYCL-Runtime-${{ github.event.inputs.tag }}
-        :: echo f | xcopy "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\windows\bin\sycl6.dll" SYCL-Runtime-${{ github.event.inputs.tag }} /f
-        :: echo f | xcopy "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\windows\bin\pi_*.dll" SYCL-Runtime-${{ github.event.inputs.tag }} /f /i
-        :: echo f | xcopy "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\windows\redist\intel64_win\compiler\libmmd.dll" SYCL-Runtime-${{ github.event.inputs.tag }} /f
+        :: echo f | xcopy "C:\Program Files (x86)\Intel\oneAPI\compiler\2024.2\windows\bin\sycl6.dll" SYCL-Runtime-${{ github.event.inputs.tag }} /f
+        :: echo f | xcopy "C:\Program Files (x86)\Intel\oneAPI\compiler\2024.2\windows\bin\pi_*.dll" SYCL-Runtime-${{ github.event.inputs.tag }} /f /i
+        :: echo f | xcopy "C:\Program Files (x86)\Intel\oneAPI\compiler\2024.2\windows\redist\intel64_win\compiler\libmmd.dll" SYCL-Runtime-${{ github.event.inputs.tag }} /f
         :: 7z a -t7z -mx=9 ../SYCL-Runtime-${{ github.event.inputs.tag }}.7z SYCL-Runtime-${{ github.event.inputs.tag }}
 
     - name: Release
